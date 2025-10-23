@@ -1,0 +1,37 @@
+{
+  "name": "starspot",
+  "version": "1.0.0",
+  "description": "An open-source platform for reporting and verifying celebrity sightings.",
+  "main": "src/backend/app.ts",
+  "scripts": {
+    "start": "ts-node src/backend/app.ts",
+    "build": "tsc",
+    "test": "jest",
+    "lint": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/starspot.git"
+  },
+  "keywords": [
+    "celebrity",
+    "sightings",
+    "reporting",
+    "verification",
+    "open-source"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.10.9",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.1.2",
+    "ts-node": "^9.1.1",
+    "eslint": "^7.14.0",
+    "jest": "^26.6.3"
+  }
+}

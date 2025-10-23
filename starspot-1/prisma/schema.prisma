@@ -1,0 +1,51 @@
+// This file defines the database schema for the application, including models for Users, Groups, Celebrities, Sightings, and Subscriptions.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          Int        @id @default(autoincrement())
+  name        String?
+  email       String     @unique
+  image       String?
+  sightings    Sighting[]
+  subscriptions Subscription[]
+}
+
+model Group {
+  id          Int        @id @default(autoincrement())
+  name        String     @unique
+  celebrities Celebrity[]
+}
+
+model Celebrity {
+  id          Int        @id @default(autoincrement())
+  name        String     @unique
+  groupId     Int
+  group       Group      @relation(fields: [groupId], references: [id])
+  sightings    Sighting[]
+}
+
+model Sighting {
+  id          Int        @id @default(autoincrement())
+  userId      Int
+  celebrityId Int
+  location    String
+  timestamp   DateTime   @default(now())
+  user        User       @relation(fields: [userId], references: [id])
+  celebrity   Celebrity   @relation(fields: [celebrityId], references: [id])
+}
+
+model Subscription {
+  id          Int        @id @default(autoincrement())
+  userId      Int
+  celebrityId Int
+  user        User       @relation(fields: [userId], references: [id])
+  celebrity   Celebrity   @relation(fields: [celebrityId], references: [id])
+}
