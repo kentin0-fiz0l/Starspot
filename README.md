@@ -1,4 +1,4 @@
-# Starspot
+# StarSpot
 
 StarSpot is an open-source, crowd-powered platform to report, verify, and get alerted to public celebrity sightings in real time — responsibly and ethically. It combines geolocation, verified crowd input, and modern auth to create a fun, privacy-first experience.
 
@@ -18,35 +18,38 @@ StarSpot is an open-source, crowd-powered platform to report, verify, and get al
 - Tests: Jest / React Testing Library
 - Deployment: Vercel, Render, Fly.io, or self-hosted Docker
 
-## Quickstart (local)
-Prerequisites: Node 18+, pnpm/npm, PostgreSQL (or use Docker)
+## Quickstart (development - devcontainer on Ubuntu 24.04)
+Prerequisites: Node 18+, pnpm or npm, PostgreSQL (or Docker)
 
-1. Clone and install
+1. From workspace root
 ```bash
-git clone https://github.com/<your-username>/starspot.git
-cd starspot
+cd /workspaces/Starspot
+```
+
+2. Install dependencies
+```bash
 pnpm install      # or npm install
 ```
 
-2. Copy env and configure
+3. Copy env and configure
 ```bash
 cp .env.example .env.local
 # Edit .env.local: DATABASE_URL, NEXTAUTH_URL, NEXTAUTH_SECRET, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GITHUB_ID, GITHUB_SECRET, MAPBOX_TOKEN
 ```
 
-3. Prepare DB
+4. Prepare DB
 ```bash
 npx prisma migrate dev --name init
 # or for quick sync:
 npx prisma db push
 ```
 
-4. Seed (optional)
+5. Seed (optional)
 ```bash
 pnpm run seed
 ```
 
-5. Start dev server
+6. Start dev server
 ```bash
 pnpm dev
 # visit http://localhost:3000
