@@ -5,9 +5,15 @@ on:
     branches:
       - main
       - 'feature/**'
+    paths:
+      - 'starspot/**'
+      - '.github/workflows/ci.yml'
   pull_request:
     branches:
       - main
+    paths:
+      - 'starspot/**'
+      - '.github/workflows/ci.yml'
 
 jobs:
   test-and-build:
