@@ -1,61 +1,73 @@
-# StarSpot
+# 🌟 StarSpot
 
-StarSpot is an open-source platform designed for reporting and verifying celebrity sightings. It provides a user-friendly interface for users to submit their sightings and a robust backend for managing and verifying these reports. The platform aims to create a community-driven database of celebrity sightings, allowing fans to share their experiences and verify the authenticity of reports.
+**StarSpot** is an open-source, crowd-powered platform that lets users **report**, **verify**, and **get alerted to** celebrity sightings in real time — responsibly and ethically. It combines geolocation, social input, and modern authentication to create a fun and dynamic way to see who’s been spotted where.
 
-## Features
+## 🛰️ Core Concept
 
-- **Submit Sightings**: Users can easily report their celebrity sightings through a simple form.
-- **Verify Sightings**: A verification system ensures that submitted sightings are authentic and credible.
-- **Community Engagement**: Users can interact with each other, sharing their experiences and insights.
-- **Responsive Design**: The platform is built with a mobile-first approach, ensuring a seamless experience across devices.
+StarSpot acts as a **crowdsourced radar** for public celebrity sightings. Users can:
 
-## Getting Started
+- Submit sightings (with optional photo and location)
+- View nearby or trending sightings on a live map
+- Subscribe to specific **celebrities** or **groups** (e.g., “Actors,” “Athletes,” “Musicians”)
+- Get real-time notifications when verified sightings occur within their area
 
-To get started with StarSpot, follow these steps:
+All data is anonymized for privacy and delayed slightly to discourage stalking or harassment.
 
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/yourusername/starspot.git
-   cd starspot
-   ```
+## 🧱 Tech Stack
 
-2. **Install Dependencies**:
-   For the backend:
-   ```bash
-   cd src/backend
-   npm install
-   ```
+| Layer              | Technology                                                          |
+| ------------------ | ------------------------------------------------------------------- |
+| **Frontend**       | [Next.js 14](https://nextjs.org/) with App Router                   |
+| **Backend**        | Node.js + API routes                                                |
+| **Database**       | PostgreSQL (via [Prisma ORM](https://www.prisma.io/))               |
+| **Authentication** | [NextAuth.js](https://next-auth.js.org/) with Google + GitHub OAuth |
+| **Mapping**        | [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js/)               |
+| **Hosting**        | Flexible (DigitalOcean, Render, Fly.io, or self-hosted)             |
 
-   For the frontend:
-   ```bash
-   cd src/frontend
-   npm install
-   ```
+## ⚙️ Key Features
 
-3. **Run the Application**:
-   Start the backend server:
-   ```bash
-   cd src/backend
-   npm start
-   ```
+- 🗺️ Interactive Map of verified sightings
+- 🔔 Group-based and celebrity-specific alert subscriptions
+- 🔐 Secure OAuth login via Google or GitHub
+- 🧭 Smart filters (by group, location, trending)
+- ⏱️ Delayed coordinates for user privacy
+- 🧩 Scalable modular architecture (easily add push notifications or AI moderation later)
 
-   Start the frontend application:
-   ```bash
-   cd src/frontend
-   npm start
-   ```
+## 🧩 Data Model Overview
 
-4. **Access the Application**:
-   Open your browser and navigate to `http://localhost:3000` to view the application.
+- **Users** – authenticated via Google/GitHub
+- **Groups** – categories like *Musicians*, *Actors*, *Athletes*
+- **Celebrities** – linked to a Group
+- **Sightings** – geotagged reports from users
+- **Subscriptions** – connects a user to a Group or Celebrity for alerts
 
-## Contributing
+## 🛠️ Setup
 
-We welcome contributions from the community! Please read our [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on how to contribute to the project.
+```bash
+git clone https://github.com/<your-username>/starspot.git
+cd starspot
+npm install
+cp .env.example .env.local
+# Edit credentials for Google/GitHub OAuth and Postgres
+npx prisma db push
+npm run dev
+```
 
-## License
+Then visit **[http://localhost:3000](http://localhost:3000)** to sign in and explore.
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+## 🧠 Future Roadmap
 
-## Acknowledgments
+- ✅ Core reporting + map view
+- 🚧 Real-time WebSocket updates
+- 🚧 Mobile-friendly PWA
+- 🚧 AI photo verification for celebrities
+- 🚧 Moderation dashboard & abuse reporting
+- 🚧 Push notifications for proximity alerts
 
-Thanks to all the contributors and supporters who make StarSpot possible!
+## 🧭 Ethics & Privacy
+
+StarSpot does **not** provide exact live locations — all sightings are delayed and generalized to protect public figures and users. Non-celebrity faces in uploaded photos are automatically blurred.
+
+## 💬 Vision
+
+To create a **responsible, transparent, and community-driven** way to share public celebrity sightings — balancing fandom, fun, and ethics through technology.

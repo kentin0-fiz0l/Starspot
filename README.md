@@ -52,8 +52,38 @@ pnpm run seed
 6. Start dev server
 ```bash
 pnpm dev
-# visit http://localhost:3000
+# open http://localhost:3000
 ```
+
+## Auth setup (NextAuth: Google + GitHub)
+
+This project includes NextAuth wiring. Add the following to `.env.local`:
+
+- NEXTAUTH_URL="http://localhost:3000"
+- NEXTAUTH_SECRET="<a long, random string>"
+- GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET
+- GITHUB_ID, GITHUB_SECRET
+
+Create OAuth apps in:
+
+- Google Cloud Console -> OAuth 2.0 Client IDs
+  - Authorized redirect URI: http://localhost:3000/api/auth/callback/google
+- GitHub Developer Settings -> OAuth Apps
+  - Authorization callback URL: http://localhost:3000/api/auth/callback/github
+
+After adding env vars, install next-auth and run dev:
+
+```bash
+cd /workspaces/Starspot/starspot
+pnpm add next-auth || npm install next-auth
+cp .env.example .env.local
+# edit .env.local to add provider secrets and NEXTAUTH_SECRET
+pnpm install || npm install
+pnpm dev || npm run dev
+```
+
+Sign-in page: http://localhost:3000/signin  
+Protected profile page: http://localhost:3000/profile
 
 ## Docker (optional)
 Build and run:
