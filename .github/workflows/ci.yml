@@ -43,7 +43,7 @@ jobs:
       - name: Install dependencies (starspot)
         working-directory: ./starspot
         run: |
-          npm ci
+          npm ci --prefer-offline --no-audit
 
       - name: Cache node_modules (starspot)
         uses: actions/cache@v4
