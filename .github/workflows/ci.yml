@@ -29,6 +29,15 @@ jobs:
         working-directory: ./starspot
         run: npm ci
 
+      - name: Cache npm
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ matrix.node }}-starspot-${{ hashFiles('starspot/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ matrix.node }}-starspot-
+            ${{ runner.os }}-node-${{ matrix.node }}-
+
       - name: Run tests (starspot)
         working-directory: ./starspot
         run: npm test
