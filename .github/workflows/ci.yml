@@ -45,3 +45,12 @@ jobs:
       - name: Build (starspot)
         working-directory: ./starspot
         run: npm run build
+
+      - name: Cache .next (starspot)
+        uses: actions/cache@v4
+        with:
+          path: starspot/.next
+          key: ${{ runner.os }}-nextjs-starspot-${{ hashFiles('starspot/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-starspot-
+            ${{ runner.os }}-
