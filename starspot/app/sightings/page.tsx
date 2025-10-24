@@ -21,10 +21,10 @@ const SightingsPage = () => {
         {sightings.length === 0 ? (
           <p>No sightings reported yet.</p>
         ) : (
-          sightings.map((sighting) => (
-            <SightingCard key={sighting.id} sighting={sighting} />
-          ))
-        )}
+            sightings.map((sighting) => (
+              <SightingCard key={sighting.id} sighting={sighting} />
+            ))
+          )}
       </div>
     </div>
   );

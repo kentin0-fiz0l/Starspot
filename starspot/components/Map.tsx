@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import mapboxgl from 'mapbox-gl';
 
-mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
+mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN || process.env.MAPBOX_TOKEN || '';
 
 const Map = ({ sightings }) => {
     const mapContainer = useRef(null);
@@ -20,12 +20,19 @@ const Map = ({ sightings }) => {
         // Add navigation control (the +/- zoom buttons)
         map.current.addControl(new mapboxgl.NavigationControl(), 'top-right');
 
-        // Add markers for each sighting
+        // Add markers for each sighting (support different field names)
         sightings.forEach(sighting => {
-            const marker = new mapboxgl.Marker()
-                .setLngLat([sighting.longitude, sighting.latitude])
-                .setPopup(new mapboxgl.Popup().setHTML(`<h3>${sighting.celebrityName}</h3><p>${sighting.location}</p>`))
-                .addTo(map.current);
+            const lng = sighting.lng ?? sighting.longitude ?? sighting.longitude_deg ?? 0
+            const lat = sighting.lat ?? sighting.latitude ?? sighting.latitude_deg ?? 0
+            const title = sighting?.celebrity?.name ?? sighting.celebrityName ?? 'Sighted'
+            const desc = sighting?.location ?? ''
+
+            if (typeof lng === 'number' && typeof lat === 'number') {
+                new mapboxgl.Marker()
+                    .setLngLat([lng, lat])
+                    .setPopup(new mapboxgl.Popup().setHTML(`<h3>${title}</h3><p>${desc}</p>`))
+                    .addTo(map.current)
+            }
         });
 
     }, [sightings]);

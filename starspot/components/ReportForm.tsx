@@ -7,26 +7,26 @@ const ReportForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const formData = new FormData();
-        formData.append('celebrityName', celebrityName);
-        formData.append('location', location);
-        if (photo) {
-            formData.append('photo', photo);
+
+        const payload = {
+            celebrityName,
+            location,
         }
 
         try {
             const response = await fetch('/api/sightings', {
                 method: 'POST',
-                body: formData,
-            });
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+            })
+
             if (response.ok) {
-                // Handle successful submission (e.g., reset form, show success message)
                 setCelebrityName('');
                 setLocation('');
                 setPhoto(null);
             } else {
-                // Handle error (e.g., show error message)
-                console.error('Error submitting sighting');
+                const text = await response.text()
+                console.error('Error submitting sighting', text);
             }
         } catch (error) {
             console.error('Error:', error);
