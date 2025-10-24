@@ -31,11 +31,7 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
-      - name: Install dependencies (starspot)
-        working-directory: ./starspot
-        run: npm ci
-
-      - name: Cache npm
+      - name: Restore npm cache
         uses: actions/cache@v4
         with:
           path: ~/.npm
@@ -43,6 +39,20 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-${{ matrix.node }}-starspot-
             ${{ runner.os }}-node-${{ matrix.node }}-
+
+      - name: Install dependencies (starspot)
+        working-directory: ./starspot
+        run: |
+          npm ci
+
+      - name: Cache node_modules (starspot)
+        uses: actions/cache@v4
+        with:
+          path: starspot/node_modules
+          key: ${{ runner.os }}-node-modules-starspot-${{ hashFiles('starspot/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-starspot-
+            ${{ runner.os }}-
 
       - name: Run tests (starspot)
         working-directory: ./starspot
