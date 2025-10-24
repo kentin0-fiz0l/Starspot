@@ -1,3 +1,4 @@
+ 'use client'
 import React, { useState } from 'react';
 
 const ReportForm = () => {
@@ -32,6 +33,15 @@ const ReportForm = () => {
             console.error('Error:', error);
         }
     };
+
+    async function fillLocation() {
+        if (!navigator.geolocation) return
+        navigator.geolocation.getCurrentPosition((pos) => {
+            setLocation(`${pos.coords.latitude}, ${pos.coords.longitude}`)
+        }, (err) => {
+            console.warn('Geolocation failed', err)
+        })
+    }
 
     return (
         <form onSubmit={handleSubmit}>
